@@ -15,11 +15,12 @@ router.post('/',(req,res,next)=>{
    })
          
      user.save((err,doc)=>{
-        if(!err) {res.json(doc);}
+        if(!err) {        res.json({message : "succsse",status:200,doc});
+}
         else res.status(422).json({  
             message : "couldn't save data"
         })
-        console.error(err);
+       
      })
     
 })
@@ -27,13 +28,19 @@ router.post('/',(req,res,next)=>{
 router.get('/',(req,res,next)=>{
  
     users.find({},(err,doc)=>{
-      if(!err) {res.json(doc);}
+      if(!err) {        res.json({message : "succsse",status:200,doc});
+}
         else res.status(422).json({
             message : "couldn't reterive data"
         })
     })
 })
  
+router.all('**',(req,res)=>{
+    res.status(404);
+    res.send('page not found');
+});
+
 
 
 module.exports = router;
