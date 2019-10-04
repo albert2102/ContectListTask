@@ -29,8 +29,9 @@ router.post('/',(req,res,next)=>{
       })
  
  })
+
  //second API contactlist
- router.post('/allcontactlist',(req,res,next)=>{
+ router.post('/allcontacts',(req,res,next)=>{
 
      contact.find({userAuthentication:req.body.userAuthentication,
             userDevicetoken:req.body.userDevicetoken,
@@ -44,7 +45,8 @@ router.post('/',(req,res,next)=>{
               message : "couldn't reterive data"
           })
         })
- })
+ }) 
+
  //third API recentcontacts
  router.post('/recentContacts',(req,res,next)=>{
 
@@ -55,12 +57,14 @@ router.post('/',(req,res,next)=>{
    }).sort('-date').limit(5).exec((err,doc)=>{
        if(!err) {
         res.json({message : "succsse",status:200,doc});
-    }
+        }
          else res.status(422).json({
              message : "couldn't reterive data"
          })
        })
 })
+
+ 
 router.all('**',(req,res)=>{
     res.status(404);
     res.send('page not found');
