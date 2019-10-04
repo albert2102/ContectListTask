@@ -42,6 +42,7 @@ const contactsSchema = new mongoose.Schema({
         validate: [validateEmail, 'Please fill a valid email address'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']  
         },
+        userId:{type:mongoose.Schema.Types.ObjectId,ref:"user"},
         userAuthentication: {type:String},
         userDevicetoken: {type:String},
         userFingerprint: {type:String}
