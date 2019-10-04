@@ -13,6 +13,7 @@ router.post('/',(req,res,next)=>{
         lastName : req.body.lastName,
         email :req.body.email,
         phoneNumber :req.body.phoneNumber,
+        userId:req.body.userId,
         userAuthentication:  req.body.userAuthentication,
         userDevicetoken:  req.body.userDevicetoken,
         userFingerprint:  req.body.userFingerprint
@@ -20,7 +21,7 @@ router.post('/',(req,res,next)=>{
           
       contacts.save((err,doc)=>{
          if(!err) {
-             res.json(doc);
+             res.json({message : "succsse",status:200,doc});
             }
          else {
             next();
@@ -29,7 +30,7 @@ router.post('/',(req,res,next)=>{
  
  })
  //second API contactlist
- router.post('/',(req,res,next)=>{
+ router.post('/allcontactlist',(req,res,next)=>{
 
      contact.find({userAuthentication:req.body.userAuthentication,
             userDevicetoken:req.body.userDevicetoken,
@@ -37,7 +38,7 @@ router.post('/',(req,res,next)=>{
 
     }).exec((err,doc)=>{
         if(!err) {
-            res.json(doc);
+            res.json({message : "succsse",status:200,doc});
         }
           else res.status(401).json({
               message : "couldn't reterive data"
@@ -53,8 +54,8 @@ router.post('/',(req,res,next)=>{
 
    }).sort('-date').limit(5).exec((err,doc)=>{
        if(!err) {
-           res.json(doc);
-       }
+        res.json({message : "succsse",status:200,doc});
+    }
          else res.status(422).json({
              message : "couldn't reterive data"
          })
