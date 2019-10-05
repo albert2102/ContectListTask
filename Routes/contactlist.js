@@ -42,7 +42,7 @@ router.post('/',(req,res,next)=>{
             res.json({message : "succsse",status:200,doc});
         }
            else {
-             res.json({message:"Can't Save Data",status:422});
+             res.json({message:"Can't Retrive Data",status:422});
         }
         })
  }) 
@@ -59,7 +59,7 @@ router.post('/',(req,res,next)=>{
         res.json({message : "succsse",status:200,doc});
         }
            else {
-             res.json({message:"Can't Save Data",status:422});
+             res.json({message:"Can't Retrive Data",status:422});
         }
        })
 })
