@@ -6,7 +6,7 @@ const router =express.Router();
 
 
  //first API createcontact
-router.post('/',(req,res,next)=>{
+router.post('/createcontact',(req,res,next)=>{
     
     const contacts =new contact({
         firstName: req.body.firstName,
@@ -37,12 +37,15 @@ router.post('/',(req,res,next)=>{
             userDevicetoken:req.body.userDevicetoken,
             userFingerprint:req.body.userFingerprint
 
-    }).exec((err,doc)=>{
-        if(!err) {
+    },(err,doc)=>{
+        if(!err && doc.length !=0) {
             res.json({message : "succsse",status:200,doc});
         }
-           else {
+           else if(err){
              res.json({message:"Can't Retrive Data",status:422});
+             }
+        else if(doc.length === 0){
+            res.json({message:"There isn't such user",status:432});
         }
         })
  }) 
@@ -55,14 +58,18 @@ router.post('/',(req,res,next)=>{
            userFingerprint:req.body.userFingerprint
 
    }).sort('-date').limit(5).exec((err,doc)=>{
-       if(!err) {
+    if(!err && doc.length !=0) {
         res.json({message : "succsse",status:200,doc});
-        }
-           else {
-             res.json({message:"Can't Retrive Data",status:422});
-        }
-       })
+    }
+       else if(err){
+         res.json({message:"Can't Retrive Data",status:422});
+         }
+    else if(doc.length === 0){
+        res.json({message:"There isn't such user",status:432});
+    }
+    })
 })
+
 
  
 router.all('**',(req,res)=>{
