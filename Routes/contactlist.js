@@ -24,7 +24,7 @@ router.post('/',(req,res,next)=>{
              res.json({message : "succsse",status:200,doc});
             }
          else {
-            next();
+             res.json({message:"Can't Save Data",status:422});
         }
       })
  
@@ -41,9 +41,9 @@ router.post('/',(req,res,next)=>{
         if(!err) {
             res.json({message : "succsse",status:200,doc});
         }
-          else res.status(401).json({
-              message : "couldn't reterive data"
-          })
+           else {
+             res.json({message:"Can't Save Data",status:422});
+        }
         })
  }) 
 
@@ -58,9 +58,9 @@ router.post('/',(req,res,next)=>{
        if(!err) {
         res.json({message : "succsse",status:200,doc});
         }
-         else res.status(422).json({
-             message : "couldn't reterive data"
-         })
+           else {
+             res.json({message:"Can't Save Data",status:422});
+        }
        })
 })
 
